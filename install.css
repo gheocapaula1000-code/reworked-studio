@@ -1,0 +1,13 @@
+/* Metti in home + footer Pi.Gi */
+.install-btn{width:auto;display:inline-flex;align-items:center;gap:.35rem;background:transparent;border:1px solid var(--border);color:var(--text);font-size:.85rem;font-weight:600;padding:.55rem .85rem;min-height:44px;border-radius:999px;margin:0;cursor:pointer}
+.install-btn:hover{background:var(--surface-2)}
+.install-btn[hidden],.install-sheet[hidden],[data-ios][hidden],[data-other][hidden]{display:none!important}
+.install-sheet{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center;z-index:100;padding:1rem;padding-bottom:max(1rem,env(safe-area-inset-bottom))}
+.install-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;max-width:420px;width:100%;padding:1.2rem 1.2rem .6rem;color:var(--text)}
+.install-card h2{font-size:1.1rem;margin-bottom:.8rem}
+.install-card ol{padding-left:1.3rem;line-height:1.55;font-size:.95rem}
+.install-card li{margin-bottom:.4rem}
+.install-note{font-size:.85rem;color:var(--text-muted,var(--muted));margin:.6rem 0 1rem}
+.pigi-footer{padding:1.2rem 1rem calc(1.2rem + env(safe-area-inset-bottom));text-align:center;font-size:.78rem;line-height:1.6;color:var(--text-muted,var(--muted));border-top:1px solid var(--border);background:var(--bg);overflow-wrap:anywhere}
+.pigi-footer a{color:var(--text);text-decoration:underline;display:inline-block;padding:.3rem .1rem}
+.pigi-links a{padding:.6rem .4rem;min-height:44px;line-height:2}

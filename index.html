@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Reworked Studio · Disegni tecnici per stilisti e sarti</title>
+  <meta name="description" content="Crea disegni tecnici di capi reworked, fronte e retro, con note di produzione per il sarto. Funziona anche come app sul telefono.">
+  <meta name="application-name" content="Reworked Studio">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Reworked Studio">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1a1d27">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="install.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar sinistra -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-row">
+          <div>
+            <h1>Reworked Studio</h1>
+            <p>Disegni tecnici per stilisti e sarti</p>
+          </div>
+          <button type="button" id="installBtn" class="install-btn" hidden aria-label="Metti Reworked Studio nella schermata Home">⤓ Metti in home</button>
+        </div>
+      </div>
+      <div class="sidebar-content">
+        <ol class="steps" id="steps">
+          <li>Incolla la tua chiave API</li>
+          <li>Scegli capo, materiali e stile</li>
+          <li>Premi <strong>Genera disegno tecnico</strong></li>
+        </ol>
+
+        <div class="section-title">API & Progetto</div>
+        <label for="apiKey">API Key (Recraft / fal.ai)</label>
+        <input type="password" id="apiKey" placeholder="Incolla la chiave API" autocomplete="off" spellcheck="false">
+        <p class="hint" id="keyHint">La chiave resta solo su questo dispositivo. Non ce l'hai? <a href="https://www.recraft.ai/" target="_blank" rel="noopener">Creala su Recraft</a>.</p>
+
+        <label for="projectName">Nome progetto / collezione</label>
+        <input type="text" id="projectName" placeholder="es. Capsule Denim Reworked 2026">
+
+        <div class="section-title">Parametri disegno</div>
+        <label for="itemType">Tipo di capo</label>
+        <select id="itemType">
+          <option>Giacca denim reworked</option>
+          <option>Jeans / pantaloni reworked</option>
+          <option>Felpa / hoodie reworked</option>
+          <option>Camicia / overshirt</option>
+          <option>Abito mini / midi</option>
+          <option>Borsa tote / accessorio</option>
+          <option>Giacca / bomber</option>
+          <option>Altro</option>
+        </select>
+
+        <label for="materials">Materiali (da usato al kg)</label>
+        <input type="text" id="materials" placeholder="denim thrift, cotone, jersey, scarti...">
+
+        <label for="style">Stile</label>
+        <select id="style">
+          <option>Streetwear Deconstructed</option>
+          <option>Patchwork Zero-Waste</option>
+          <option>Minimalist Reworked</option>
+          <option>Thrift Chic</option>
+          <option>Y2K Reworked</option>
+          <option>Utility / Workwear</option>
+        </select>
+
+        <label for="extraPrompt">Brief / dettagli per stilista e sarto</label>
+        <textarea id="extraPrompt" placeholder="Silhouette, dettagli costruttivi, note speciali, vista fronte e retro..."></textarea>
+
+        <button id="generateBtn">Genera disegno tecnico</button>
+        <button id="saveBtn" class="secondary">Salva progetto</button>
+
+        <div class="section-title">Progetti recenti</div>
+        <div id="projectList" class="project-list"></div>
+      </div>
+    </aside>
+
+    <!-- Viewer centrale -->
+    <main class="viewer-area" id="viewerArea">
+      <div class="viewer-toolbar">
+        <h2 id="currentTitle">Disegno tecnico</h2>
+        <div class="toolbar-actions">
+          <button id="downloadBtn" class="secondary">Scarica</button>
+          <button id="printBtn" class="secondary">Stampa / PDF</button>
+          <button id="zoomInBtn" class="secondary" aria-label="Ingrandisci">Zoom +</button>
+          <button id="zoomOutBtn" class="secondary" aria-label="Rimpicciolisci">Zoom −</button>
+        </div>
+      </div>
+      <div class="viewer" id="viewer">
+        <div class="viewer-placeholder">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18M9 21V9"/>
+          </svg>
+          <p>Il disegno apparirà qui<br><small>Sul computer lo vedi più grande</small></p>
+        </div>
+      </div>
+      <div class="status-bar">
+        <span id="status" role="status" aria-live="polite">Pronto</span>
+        <span class="status-tag">Reworked Studio · per stilisti e sarti</span>
+      </div>
+    </main>
+
+    <!-- Pannello destro -->
+    <aside class="right-panel">
+      <div class="right-header"><label for="notes" class="right-label">Note di produzione</label></div>
+      <div class="right-content">
+        <textarea id="notes" class="notes-box" placeholder="Note per il sarto e lo stilista...&#10;&#10;• Materiali da lotto kg&#10;• Cuciture e hardware&#10;• Misure suggerite&#10;• Istruzioni speciali"></textarea>
+
+        <div class="section-title">Galleria</div>
+        <div id="gallery" class="gallery-grid"></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="install-sheet" id="installSheet" hidden role="dialog" aria-modal="true" aria-labelledby="installTitle">
+    <div class="install-card">
+      <h2 id="installTitle">Metti <span data-appname></span> in home</h2>
+      <div data-ios>
+        <ol>
+          <li>In Safari tocca <strong>Condividi</strong> <span aria-hidden="true">(il quadrato con la freccia in su)</span>.</li>
+          <li>Scegli <strong>«Aggiungi alla schermata Home»</strong>.</li>
+          <li>Tocca <strong>Aggiungi</strong>.</li>
+        </ol>
+        <p class="install-note">Così <span data-appname></span> sta in home come le altre app e funziona anche senza rete.</p>
+      </div>
+      <div data-other hidden>
+        <ol>
+          <li>Apri il menu del browser <span aria-hidden="true">(⋮ in alto a destra)</span>.</li>
+          <li>Scegli <strong>«Installa app»</strong> o <strong>«Aggiungi a schermata Home»</strong>.</li>
+        </ol>
+        <p class="install-note">Funziona meglio con Chrome, Edge o Samsung Internet.</p>
+      </div>
+      <button type="button" class="secondary" data-close>Ho capito</button>
+    </div>
+  </div>
+
+  <footer class="pigi-footer">
+    <p><strong>Pi.Gi Service</strong> · Via Guido Reni 8, 35133 Padova (PD) · P.IVA 05770260288</p>
+    <p><a href="mailto:info@pigiservice.com">info@pigiservice.com</a> · PEC <a href="mailto:pigiservice@pec.it">pigiservice@pec.it</a> · <a href="tel:+393520966114">+39 352 0966114</a></p>
+    <p class="pigi-links"><a href="privacy.html">Privacy</a> · <a href="termini.html">Termini</a> · <a href="cookie.html">Cookie</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="install.js"></script>
+</body>
+</html>

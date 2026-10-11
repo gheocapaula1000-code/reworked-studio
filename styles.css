@@ -1,0 +1,291 @@
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface-2: #242836;
+  --border: #2e3344;
+  --text: #e8eaed;
+  --text-muted: #9aa0b0;
+  --accent: #6c8cff;
+  --accent-hover: #5a7af0;
+  --success: #3dd68c;
+  --warning: #f5a524;
+  --danger: #f25f5c;
+  --radius: 12px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Mobile first: una colonna (form → disegno → note). Da 1100px: tre colonne come in origine */
+.app {
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Sidebar sinistra */
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-header h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.sidebar-header p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem 1.5rem 2rem;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 1.4rem 0 0.7rem;
+  font-weight: 600;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+
+input, select, textarea {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  outline: none;
+  transition: border 0.15s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+}
+
+textarea { resize: vertical; min-height: 90px; }
+
+button {
+  width: 100%;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-bottom: 0.6rem;
+}
+
+button:hover { background: var(--accent-hover); }
+button.secondary { background: var(--surface-2); border: 1px solid var(--border); }
+button.secondary:hover { background: #2e3344; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Viewer centrale */
+.viewer-area {
+  display: flex;
+  flex-direction: column;
+  background: #0c0e14;
+  overflow: hidden;
+}
+
+.viewer-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.viewer-toolbar h2 { font-size: 1rem; font-weight: 600; }
+
+.toolbar-actions { display: flex; gap: 0.5rem; }
+.toolbar-actions button { width: auto; padding: 0.5rem 1rem; margin: 0; font-size: 0.85rem; }
+
+.viewer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: auto;
+}
+
+.viewer img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  background: white;
+}
+
+.viewer-placeholder {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.viewer-placeholder svg { opacity: 0.4; margin-bottom: 1rem; }
+
+/* Pannello destro */
+.right-panel {
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.right-header {
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.right-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem 1.5rem 2rem;
+}
+
+.notes-box {
+  background: var(--surface-2);
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  min-height: 180px;
+  border: 1px solid var(--border);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.thumb {
+  background: var(--surface-2);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.15s;
+}
+
+.thumb:hover, .thumb.active { border-color: var(--accent); }
+.thumb img { width: 100%; height: 90px; object-fit: cover; display: block; }
+.thumb-label { font-size: 0.7rem; padding: 0.3rem 0.4rem; color: var(--text-muted); }
+
+.status-bar {
+  padding: 0.6rem 1.2rem;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #3a3f52; border-radius: 4px; }
+
+/* Aggiunte mobile-first */
+.brand-row { display: flex; align-items: flex-start; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
+.steps { list-style: none; counter-reset: s; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: .8rem .9rem; font-size: .88rem; line-height: 1.5; }
+.steps li { counter-increment: s; display: flex; gap: .55rem; align-items: baseline; padding: .15rem 0; }
+.steps li::before { content: counter(s); flex: 0 0 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--accent); color: #fff; font-size: .75rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+.steps li.done { color: var(--text-muted); }
+.steps li.done::before { content: '✓'; background: var(--success); color: #0f1117; }
+.hint { font-size: .8rem; color: var(--text-muted); margin: -.6rem 0 1rem; line-height: 1.45; }
+.hint a { color: var(--accent); }
+.hint.warn { color: var(--warning); }
+input.need { border-color: var(--warning); }
+.project-list { font-size: .85rem; color: var(--text-muted); }
+.project-item { display: block; width: 100%; text-align: left; background: transparent; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; color: var(--text); font-weight: 500; padding: .7rem 0; margin: 0; min-height: 44px; font-size: .9rem; }
+.project-item:hover { background: transparent; color: var(--accent); }
+.project-item small { color: var(--text-muted); font-weight: 400; }
+.right-label { margin: 0; font-size: 1rem; }
+input, select, textarea { font-size: 16px; } /* niente zoom automatico su iPhone */
+.sidebar, .right-panel { border: 0; border-bottom: 1px solid var(--border); overflow: visible; }
+.sidebar-content, .right-content { overflow: visible; }
+.viewer-area { overflow: visible; }
+.viewer { min-height: 300px; padding: 1rem; }
+.viewer img { transform-origin: center center; }
+.viewer-toolbar { flex-wrap: wrap; padding: .8rem 1rem; }
+.toolbar-actions { flex-wrap: wrap; }
+.toolbar-actions button { min-height: 44px; flex: 1 1 auto; }
+.status-bar { flex-wrap: wrap; gap: .4rem; }
+.thumb img { height: 110px; }
+
+@media (min-width: 1100px) {
+  .app { display: grid; grid-template-columns: 380px 1fr 320px; height: 100vh; padding-top: 0; }
+  .sidebar { border-bottom: 0; border-right: 1px solid var(--border); overflow: hidden; }
+  .right-panel { border-bottom: 0; border-left: 1px solid var(--border); overflow: hidden; }
+  .sidebar-content, .right-content { overflow-y: auto; }
+  .viewer-area { overflow: hidden; }
+  .viewer { padding: 2rem; }
+  .toolbar-actions button { flex: 0 0 auto; }
+  input, select, textarea { font-size: 0.9rem; }
+}
+@media (min-width: 1400px) {
+  .app { grid-template-columns: 420px 1fr 360px; }
+}
+
+/* Select leggibili anche su iPhone (Safari disegna i select chiari) e font coerente */
+input, select, textarea, button { font-family: inherit; }
+select {
+  -webkit-appearance: none; appearance: none;
+  background-color: var(--surface-2);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239aa0b0' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right .9rem center; padding-right: 2.4rem;
+  color: var(--text);
+}
+select option { background: #242836; color: #e8eaed; }
+input[type=file] { font-size: .9rem; }
