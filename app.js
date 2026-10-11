@@ -1,4 +1,4 @@
-// Reworked Studio — PWA per stilisti e sarti (mobile first, ottima anche su monitor grande)
+// Vaghezze Studio — PWA per stilisti e sarti (mobile first, ottima anche su monitor grande)
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 const keyHint = $('keyHint');
@@ -74,9 +74,8 @@ function addToGallery(url, label) {
 }
 
 function renderProjects() {
-  if (window.navBadge) window.navBadge('projBadge', projects.length);
   if (!projects.length) {
-    projectList.innerHTML = '<em>Nessun progetto salvato. Crea un disegno e premi «Salva progetto».</em>';
+    projectList.innerHTML = '<em>Nessun progetto salvato</em>';
     return;
   }
   projectList.innerHTML = projects.slice(0, 8).map((p, i) =>
@@ -98,7 +97,7 @@ function loadProject(i) {
   if (p.imageUrl) showImage(p.imageUrl, p.name);
   setStatus(`Progetto caricato: ${p.name}`);
   updateSteps();
-  if (!isWide() && window.goTab) window.goTab('disegno');
+  if (!isWide()) $('viewerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function buildPrompt() {
@@ -113,7 +112,6 @@ generateBtn.onclick = async () => {
     apiKeyInput.classList.add('need');
     keyHint.classList.add('warn');
     setStatus('Prima incolla la chiave API (es. Recraft)');
-    if (!isWide() && window.goTab) window.goTab('crea');
     apiKeyInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
     apiKeyInput.focus();
     return;
@@ -154,7 +152,7 @@ generateBtn.onclick = async () => {
     addToGallery(url, title);
     notes.value = `PROMPT USATO:\n${prompt}\n\nNOTE PRODUZIONE:\n• Materiali: ${materials.value || 'da usato al kg'}\n• Stile: ${style.value}\n• Controllare cuciture e hardware con il sarto\n• Aggiungere misure precise se necessario`;
     setStatus('Disegno generato con successo');
-    if (!isWide() && window.goTab) window.goTab('disegno');
+    if (!isWide()) $('viewerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
   } catch (err) {
     const msg = (err && err.message) || '';
     setStatus(navigator.onLine === false || /Failed to fetch|NetworkError|Load failed/i.test(msg)
@@ -221,7 +219,7 @@ printBtn.onclick = () => {
     <img src="${esc(currentImageUrl)}" alt="">
     <h2>Note di produzione</h2>
     <pre>${esc(notes.value)}</pre>
-    <p><small>Generato con Reworked Studio</small></p>
+    <p><small>Generato con Vaghezze Studio</small></p>
     </body></html>`);
   w.document.close();
   setTimeout(() => w.print(), 500);

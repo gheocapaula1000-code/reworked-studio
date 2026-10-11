@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Reworked Studio · Disegni tecnici per stilisti e sarti</title>
+  <title>Vaghezze Studio · Disegni tecnici per stilisti e sarti</title>
   <meta name="description" content="Crea disegni tecnici di capi reworked, fronte e retro, con note di produzione per il sarto. Funziona anche come app sul telefono.">
-  <meta name="application-name" content="Reworked Studio">
+  <meta name="application-name" content="Vaghezze Studio">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Reworked Studio">
+  <meta name="apple-mobile-web-app-title" content="Vaghezze Studio">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#1a1d27">
+  <meta name="theme-color" content="#0B1F3A">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="install.css">
-  <link rel="stylesheet" href="nav.css">
 </head>
 <body>
   <div class="app">
@@ -26,14 +25,13 @@
       <div class="sidebar-header">
         <div class="brand-row">
           <div>
-            <h1>Reworked Studio</h1>
+            <h1>Vaghezze Studio</h1>
             <p>Disegni tecnici per stilisti e sarti</p>
           </div>
-          <button type="button" id="installBtn" class="install-btn" hidden aria-label="Metti Reworked Studio nella schermata Home">⤓ Metti in home</button>
+          <button type="button" id="installBtn" class="install-btn" hidden aria-label="Metti Vaghezze Studio nella schermata Home">⤓ Metti in home</button>
         </div>
       </div>
       <div class="sidebar-content">
-        <section class="tab-pane" data-tab="crea" id="tab-crea" aria-label="Crea">
         <ol class="steps" id="steps">
           <li>Incolla la tua chiave API</li>
           <li>Scegli capo, materiali e stile</li>
@@ -79,17 +77,14 @@
 
         <button id="generateBtn">Genera disegno tecnico</button>
         <button id="saveBtn" class="secondary">Salva progetto</button>
-        </section>
 
-        <section class="tab-pane" data-tab="progetti" id="tab-progetti" aria-label="Progetti">
         <div class="section-title">Progetti recenti</div>
         <div id="projectList" class="project-list"></div>
-        </section>
       </div>
     </aside>
 
     <!-- Viewer centrale -->
-    <main class="viewer-area tab-pane" id="viewerArea" data-tab="disegno">
+    <main class="viewer-area" id="viewerArea">
       <div class="viewer-toolbar">
         <h2 id="currentTitle">Disegno tecnico</h2>
         <div class="toolbar-actions">
@@ -106,17 +101,16 @@
             <path d="M3 9h18M9 21V9"/>
           </svg>
           <p>Il disegno apparirà qui<br><small>Sul computer lo vedi più grande</small></p>
-          <a href="#crea" class="ph-link">Vai a «Crea» per iniziare</a>
         </div>
       </div>
       <div class="status-bar">
         <span id="status" role="status" aria-live="polite">Pronto</span>
-        <span class="status-tag">Reworked Studio · per stilisti e sarti</span>
+        <span class="status-tag">Vaghezze Studio · per stilisti e sarti</span>
       </div>
     </main>
 
     <!-- Pannello destro -->
-    <aside class="right-panel tab-pane" data-tab="note" id="tab-note">
+    <aside class="right-panel">
       <div class="right-header"><label for="notes" class="right-label">Note di produzione</label></div>
       <div class="right-content">
         <textarea id="notes" class="notes-box" placeholder="Note per il sarto e lo stilista...&#10;&#10;• Materiali da lotto kg&#10;• Cuciture e hardware&#10;• Misure suggerite&#10;• Istruzioni speciali"></textarea>
@@ -125,27 +119,7 @@
         <div id="gallery" class="gallery-grid"></div>
       </div>
     </aside>
-
-    <!-- Info (solo telefono) -->
-    <section class="info-panel tab-pane" data-tab="info" id="tab-info" aria-label="Info">
-      <h2>Reworked Studio</h2>
-      <p>Crei disegni tecnici di capi reworked, fronte e retro, con le note di produzione per il sarto. Il disegno lo genera Recraft con la tua chiave API.</p>
-      <ul class="info-list">
-        <li>Progetti, note e chiave restano solo su questo dispositivo.</li>
-        <li>Si apre anche senza rete; per generare un disegno serve la connessione.</li>
-        <li>Sul computer vedi tutto in tre colonne, più grande.</li>
-      </ul>
-      <button type="button" class="install-btn info-install" data-install hidden>⤓ Metti in home</button>
-    </section>
   </div>
-
-  <nav class="bottom-nav" id="bottomNav" data-max="1099" aria-label="Sezioni">
-    <button type="button" data-go="crea" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>Crea</span></button>
-    <button type="button" data-go="disegno"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><span>Disegno</span></button>
-    <button type="button" data-go="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg><span>Note</span></button>
-    <button type="button" data-go="progetti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg><span>Progetti</span><b class="nav-badge" id="projBadge" hidden></b></button>
-    <button type="button" data-go="info"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg><span>Info</span></button>
-  </nav>
 
   <div class="install-sheet" id="installSheet" hidden role="dialog" aria-modal="true" aria-labelledby="installTitle">
     <div class="install-card">
@@ -169,13 +143,13 @@
     </div>
   </div>
 
-  <footer class="pigi-footer tab-pane" data-tab="info">
+  <footer class="pigi-footer">
+    <p class="brand-line"><strong>Vaghezze Studio</strong> · un'app di <a href="https://vaghezze.com">vaghezze.com</a></p>
     <p><strong>Pi.Gi Service</strong> · Via Guido Reni 8, 35133 Padova (PD) · P.IVA 05770260288</p>
     <p><a href="mailto:info@pigiservice.com">info@pigiservice.com</a> · PEC <a href="mailto:pigiservice@pec.it">pigiservice@pec.it</a> · <a href="tel:+393520966114">+39 352 0966114</a></p>
     <p class="pigi-links"><a href="privacy.html">Privacy</a> · <a href="termini.html">Termini</a> · <a href="cookie.html">Cookie</a></p>
   </footer>
 
-  <script src="nav.js"></script>
   <script src="app.js"></script>
   <script src="install.js"></script>
 </body>

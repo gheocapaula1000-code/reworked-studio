@@ -1,8 +1,8 @@
 :root {
-  --bg: #0f1117;
-  --surface: #1a1d27;
-  --surface-2: #242836;
-  --border: #2e3344;
+  --bg: #081a31;
+  --surface: #0d2340;
+  --surface-2: #14305a;
+  --border: #24426c;
   --text: #e8eaed;
   --text-muted: #9aa0b0;
   --accent: #6c8cff;
@@ -117,14 +117,14 @@ button {
 
 button:hover { background: var(--accent-hover); }
 button.secondary { background: var(--surface-2); border: 1px solid var(--border); }
-button.secondary:hover { background: #2e3344; }
+button.secondary:hover { background: #24426c; }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Viewer centrale */
 .viewer-area {
   display: flex;
   flex-direction: column;
-  background: #0c0e14;
+  background: #06142a;
   overflow: hidden;
 }
 
@@ -234,7 +234,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #3a3f52; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #2c4a75; border-radius: 4px; }
 
 /* Aggiunte mobile-first */
 .brand-row { display: flex; align-items: flex-start; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
@@ -242,7 +242,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .steps li { counter-increment: s; display: flex; gap: .55rem; align-items: baseline; padding: .15rem 0; }
 .steps li::before { content: counter(s); flex: 0 0 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--accent); color: #fff; font-size: .75rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
 .steps li.done { color: var(--text-muted); }
-.steps li.done::before { content: '✓'; background: var(--success); color: #0f1117; }
+.steps li.done::before { content: '✓'; background: var(--success); color: #081a31; }
 .hint { font-size: .8rem; color: var(--text-muted); margin: -.6rem 0 1rem; line-height: 1.45; }
 .hint a { color: var(--accent); }
 .hint.warn { color: var(--warning); }
@@ -287,30 +287,5 @@ select {
   background-repeat: no-repeat; background-position: right .9rem center; padding-right: 2.4rem;
   color: var(--text);
 }
-select option { background: #242836; color: #e8eaed; }
+select option { background: #14305a; color: #e8eaed; }
 input[type=file] { font-size: .9rem; }
-
-/* Sezioni a schede sul telefono (barra in basso). Da 1100px tutto visibile come prima. */
-.info-panel { display: none; }
-@media (max-width: 1099px) {
-  .info-panel { display: block; padding: 1.4rem 1.5rem 1rem; }
-  .info-panel h2 { font-size: 1.1rem; margin-bottom: .5rem; }
-  .info-panel p { font-size: .92rem; line-height: 1.55; color: var(--text); margin-bottom: .8rem; }
-  .info-list { font-size: .88rem; line-height: 1.55; color: var(--text-muted); padding-left: 1.1rem; margin-bottom: 1rem; }
-  .info-list li { margin-bottom: .3rem; }
-  body:not([data-tab="crea"]) [data-tab="crea"],
-  body:not([data-tab="disegno"]) [data-tab="disegno"],
-  body:not([data-tab="note"]) [data-tab="note"],
-  body:not([data-tab="progetti"]) [data-tab="progetti"],
-  body:not([data-tab="info"]) [data-tab="info"] { display: none !important; }
-  body:not([data-tab="crea"]):not([data-tab="progetti"]) .sidebar-content { display: none; }
-  body:not([data-tab="crea"]):not([data-tab="progetti"]) .sidebar { border-bottom: 1px solid var(--border); }
-  body[data-tab="progetti"] .sidebar-content .section-title:first-child { margin-top: .2rem; }
-  .viewer { min-height: max(240px, calc(100vh - 440px)); }
-  .right-panel { border-bottom: 0; }
-  .pigi-footer { border-top: 0; }
-}
-.ph-link { display: none; }
-@media (max-width: 1099px) {
-  .ph-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: .6rem; padding: 0 1.1rem; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
-}
