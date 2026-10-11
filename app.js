@@ -74,8 +74,9 @@ function addToGallery(url, label) {
 }
 
 function renderProjects() {
+  if (window.navBadge) window.navBadge('projBadge', projects.length);
   if (!projects.length) {
-    projectList.innerHTML = '<em>Nessun progetto salvato</em>';
+    projectList.innerHTML = '<em>Nessun progetto salvato. Crea un disegno e premi «Salva progetto».</em>';
     return;
   }
   projectList.innerHTML = projects.slice(0, 8).map((p, i) =>
@@ -97,7 +98,7 @@ function loadProject(i) {
   if (p.imageUrl) showImage(p.imageUrl, p.name);
   setStatus(`Progetto caricato: ${p.name}`);
   updateSteps();
-  if (!isWide()) $('viewerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!isWide() && window.goTab) window.goTab('disegno');
 }
 
 function buildPrompt() {
@@ -112,6 +113,7 @@ generateBtn.onclick = async () => {
     apiKeyInput.classList.add('need');
     keyHint.classList.add('warn');
     setStatus('Prima incolla la chiave API (es. Recraft)');
+    if (!isWide() && window.goTab) window.goTab('crea');
     apiKeyInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
     apiKeyInput.focus();
     return;
@@ -152,7 +154,7 @@ generateBtn.onclick = async () => {
     addToGallery(url, title);
     notes.value = `PROMPT USATO:\n${prompt}\n\nNOTE PRODUZIONE:\n• Materiali: ${materials.value || 'da usato al kg'}\n• Stile: ${style.value}\n• Controllare cuciture e hardware con il sarto\n• Aggiungere misure precise se necessario`;
     setStatus('Disegno generato con successo');
-    if (!isWide()) $('viewerArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!isWide() && window.goTab) window.goTab('disegno');
   } catch (err) {
     const msg = (err && err.message) || '';
     setStatus(navigator.onLine === false || /Failed to fetch|NetworkError|Load failed/i.test(msg)

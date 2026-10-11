@@ -1,9 +1,14 @@
 // "Metti in home" — pulsante discreto + guida breve per iPhone (Pi.Gi)
 (function () {
   var APP = (document.querySelector('meta[name="application-name"]') || {}).content || document.title;
-  var btn = document.getElementById('installBtn');
+  var btns = Array.prototype.slice.call(document.querySelectorAll('#installBtn, [data-install]'));
   var sheet = document.getElementById('installSheet');
-  if (!btn || !sheet) return;
+  if (!btns.length || !sheet) return;
+  // un solo oggetto che mostra/nasconde tutti i pulsanti "Metti in home"
+  var btn = {
+    set hidden(v) { btns.forEach(function (b) { b.hidden = v; }); },
+    addEventListener: function (t, f) { btns.forEach(function (b) { b.addEventListener(t, f); }); }
+  };
   var deferred = null;
   var ua = navigator.userAgent || '';
   var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);

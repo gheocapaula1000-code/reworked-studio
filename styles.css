@@ -289,3 +289,28 @@ select {
 }
 select option { background: #242836; color: #e8eaed; }
 input[type=file] { font-size: .9rem; }
+
+/* Sezioni a schede sul telefono (barra in basso). Da 1100px tutto visibile come prima. */
+.info-panel { display: none; }
+@media (max-width: 1099px) {
+  .info-panel { display: block; padding: 1.4rem 1.5rem 1rem; }
+  .info-panel h2 { font-size: 1.1rem; margin-bottom: .5rem; }
+  .info-panel p { font-size: .92rem; line-height: 1.55; color: var(--text); margin-bottom: .8rem; }
+  .info-list { font-size: .88rem; line-height: 1.55; color: var(--text-muted); padding-left: 1.1rem; margin-bottom: 1rem; }
+  .info-list li { margin-bottom: .3rem; }
+  body:not([data-tab="crea"]) [data-tab="crea"],
+  body:not([data-tab="disegno"]) [data-tab="disegno"],
+  body:not([data-tab="note"]) [data-tab="note"],
+  body:not([data-tab="progetti"]) [data-tab="progetti"],
+  body:not([data-tab="info"]) [data-tab="info"] { display: none !important; }
+  body:not([data-tab="crea"]):not([data-tab="progetti"]) .sidebar-content { display: none; }
+  body:not([data-tab="crea"]):not([data-tab="progetti"]) .sidebar { border-bottom: 1px solid var(--border); }
+  body[data-tab="progetti"] .sidebar-content .section-title:first-child { margin-top: .2rem; }
+  .viewer { min-height: max(240px, calc(100vh - 440px)); }
+  .right-panel { border-bottom: 0; }
+  .pigi-footer { border-top: 0; }
+}
+.ph-link { display: none; }
+@media (max-width: 1099px) {
+  .ph-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: .6rem; padding: 0 1.1rem; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
+}
