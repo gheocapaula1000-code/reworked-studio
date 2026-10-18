@@ -1,8 +1,8 @@
 // Service worker Vaghezze Studio: app disponibile anche senza rete.
 // Cambia CACHE a ogni nuova versione: la vecchia cache viene cancellata.
-const CACHE = 'vaghezze-studio-v10';
+const CACHE = 'vaghezze-studio-v11';
 const ASSETS = [
-  './', './index.html', './styles.css', './app.js', './install.js', './install.css', './pull-to-refresh.js', './manifest.json',
+  './', './index.html', './styles.css', './app.js', './install.js', './install.css', './pull-to-refresh.js', './update-banner.js', './manifest.json',
   './icon.svg', './favicon.ico', './favicon-v4-16.png', './favicon-v4-32.png', './favicon-v4-48.png', './icon-v4-192.png', './icon-v4-512.png', './icon-v4-maskable-192.png', './icon-v4-maskable-512.png',
   './apple-touch-icon-v4.png', './apple-touch-icon.png', './privacy.html', './termini.html', './cookie.html', './legal.css'
 ];
@@ -28,6 +28,7 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;                       // le chiamate API passano dirette
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;         // niente cache per altri siti
+  if (url.searchParams.has('pigi-v')) return;              // controllo nuova versione: sempre dalla rete
 
   // Solo le vere pagine (senza estensione) possono ricadere sull'HTML.
   if (!FILE.test(url.pathname) && req.mode === 'navigate') {
